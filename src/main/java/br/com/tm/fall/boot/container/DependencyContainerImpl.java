@@ -1,7 +1,7 @@
 package br.com.tm.fall.boot.container;
 
 import br.com.tm.fall.boot.core.InstanceBuilder;
-import br.com.tm.fall.boot.utils.NamespaceUtils;
+import br.com.tm.fall.boot.models.utils.NamespaceUtils;
 
 import java.util.HashMap;
 import java.util.Map;

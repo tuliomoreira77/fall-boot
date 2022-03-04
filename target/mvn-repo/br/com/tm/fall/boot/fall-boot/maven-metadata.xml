@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>br.com.tm.fall.boot</groupId>
+  <artifactId>fall-boot</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20220304003535</lastUpdated>
+  </versioning>
+</metadata>

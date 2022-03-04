@@ -1,4 +1,4 @@
-package br.com.tm.fall.boot.utils;
+package br.com.tm.fall.boot.models.utils;
 
 public class NamespaceUtils {
 

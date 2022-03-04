@@ -1,0 +1,17 @@
+br\com\tm\fall\boot\annot\RiceScoped.class
+br\com\tm\fall\boot\annot\Injected.class
+br\com\tm\fall\boot\container\DependencyContainer.class
+br\com\tm\fall\boot\container\DependencyContainerImpl.class
+br\com\tm\fall\boot\core\RiceFactory.class
+br\com\tm\fall\boot\core\RiceFifo.class
+br\com\tm\fall\boot\core\RiceFifoElement.class
+br\com\tm\fall\boot\models\RiceScopeType.class
+br\com\tm\fall\boot\models\InvalidRiceBuildException.class
+br\com\tm\fall\boot\core\FallBootApplication.class
+br\com\tm\fall\boot\core\InstanceBuilder.class
+br\com\tm\fall\boot\annot\Rice.class
+br\com\tm\fall\boot\models\ConstructorNotFoundException.class
+br\com\tm\fall\boot\core\ClassScanner.class
+br\com\tm\fall\boot\core\RiceFactoryImpl.class
+br\com\tm\fall\boot\models\utils\NamespaceUtils.class
+br\com\tm\fall\boot\container\DependencyContainerFactory.class

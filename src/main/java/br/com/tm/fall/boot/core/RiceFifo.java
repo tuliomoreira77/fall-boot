@@ -1,6 +1,7 @@
 package br.com.tm.fall.boot.core;
 
-import br.com.odin.sys.desktop.fall.boot.annot.Injected;
+
+import br.com.tm.fall.boot.annot.Injected;
 
 import java.util.Arrays;
 import java.util.List;
