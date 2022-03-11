@@ -1,26 +1,29 @@
 package br.com.tm.fall.boot.core;
 
+import br.com.tm.fall.boot.annot.AfterBuild;
 import br.com.tm.fall.boot.annot.RiceScoped;
 import br.com.tm.fall.boot.container.DependencyContainer;
 import br.com.tm.fall.boot.models.InvalidRiceBuildException;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RiceFactoryImpl implements RiceFactory {
 
     private final DependencyContainer dependencyContainer;
-    private final InstanceBuilder instanceBuilder;
+    private final InstanceUtils instanceBuilder;
+    private final CoreVerifier coreVerifier;
 
     public RiceFactoryImpl(DependencyContainer dependencyContainer) {
         this.dependencyContainer = dependencyContainer;
-        this.instanceBuilder = new InstanceBuilder(this.dependencyContainer);
+        this.instanceBuilder = new InstanceUtils(this.dependencyContainer);
+        this.coreVerifier = new CoreVerifier();
     }
 
     public void createDependencyContainer(Set<Class<?>> rices) {
-        rices.forEach(instanceBuilder::verifyValidConstructor);
+        rices.forEach(coreVerifier::verifyValidConstructor);
         RiceFifo fifo = new RiceFifo(buildRiceFifoElements(rices));
+
         for(RiceFifoElement riceFifoElement = fifo.getNext(); riceFifoElement != null; riceFifoElement = fifo.getNext()) {
             if(riceFifoElement.getRice().isAnnotationPresent(RiceScoped.class)) {
                 createScopedRice(riceFifoElement, fifo);
@@ -28,7 +31,7 @@ public class RiceFactoryImpl implements RiceFactory {
                 createSingletonRice(riceFifoElement, fifo, rices.size() +1);
             }
         }
-        postConstructVerify(rices);
+        coreVerifier.verifyInstancesNotNull(rices, dependencyContainer);
     }
 
     private void createSingletonRice(RiceFifoElement riceFifoElement, RiceFifo fifo, Integer limit) {
@@ -52,15 +55,6 @@ public class RiceFactoryImpl implements RiceFactory {
     private void riceVerifier(RiceFifoElement riceFifoElement, Integer limit) {
         if(riceFifoElement.getFifoCount() > limit) {
             throw new InvalidRiceBuildException(riceFifoElement.getRice().getName());
-        }
-    }
-
-    private void postConstructVerify(Set<Class<?>> rices) {
-        for(var rice : rices) {
-            Object instance = dependencyContainer.getRice(rice);
-            if(instance == null) {
-                throw new InvalidRiceBuildException(rice.getName());
-            }
         }
     }
 

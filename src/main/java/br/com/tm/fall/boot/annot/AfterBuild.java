@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.CONSTRUCTOR)
-public @interface Injected {
+@Target(ElementType.METHOD)
+public @interface AfterBuild {
+    int priority() default Integer.MAX_VALUE;
 }

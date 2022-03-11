@@ -1,6 +1,6 @@
 package br.com.tm.fall.boot.container;
 
-import br.com.tm.fall.boot.core.InstanceBuilder;
+import br.com.tm.fall.boot.core.InstanceUtils;
 import br.com.tm.fall.boot.models.utils.NamespaceUtils;
 
 import java.util.HashMap;
@@ -8,21 +8,9 @@ import java.util.Map;
 
 public class DependencyContainerImpl implements DependencyContainer {
 
-    private final static DependencyContainerImpl instance;
     private final Map<String, Object> dependencies = new HashMap<>(100);
     private final Map<String, Class<?>> runtimeClasses = new HashMap<>(100);
-
-    private final InstanceBuilder instanceBuilder = new InstanceBuilder(this);
-
-    static {
-        instance = new DependencyContainerImpl();
-    }
-
-    private DependencyContainerImpl() {};
-
-    public static DependencyContainerImpl getInstance() {
-        return instance;
-    }
+    private final InstanceUtils instanceBuilder = new InstanceUtils(this);
 
     @Override
     public <T> T getRice(String name, Class<T> clazz) {

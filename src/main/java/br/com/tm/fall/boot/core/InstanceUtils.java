@@ -7,24 +7,18 @@ import br.com.tm.fall.boot.models.ConstructorNotFoundException;
 import br.com.tm.fall.boot.models.InvalidRiceBuildException;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class InstanceBuilder {
+public class InstanceUtils {
 
     private final DependencyContainer dependencyContainer;
 
-    public InstanceBuilder(DependencyContainer dependencyContainer) {
+    public InstanceUtils(DependencyContainer dependencyContainer) {
         this.dependencyContainer = dependencyContainer;
-    }
-
-    public void verifyValidConstructor(Class<?> clazz) {
-        Optional<Constructor<?>> constructor = Arrays.stream(clazz.getConstructors()).filter(c -> c.getAnnotation(Injected.class) != null).findFirst();
-        if (constructor.isEmpty()) {
-            throw new ConstructorNotFoundException(clazz.getName());
-        }
     }
 
     public Object buildInstance(Class<?> clazz) {
